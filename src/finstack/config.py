@@ -49,7 +49,7 @@ ENTERPRISE_ONLY_TOOLS = {
 class FinStackConfig:
     """Central configuration for the server and hosted add-ons."""
 
-    host: str = field(default_factory=lambda: os.getenv("FINSTACK_HOST", "127.0.0.1"))
+    host: str = field(default_factory=lambda: os.getenv("FINSTACK_HOST", "0.0.0.0"))
     port: int = field(default_factory=lambda: int(os.getenv("FINSTACK_PORT", "8000")))
     log_level: str = field(default_factory=lambda: os.getenv("FINSTACK_LOG_LEVEL", "INFO"))
     mode: UserTier = field(
