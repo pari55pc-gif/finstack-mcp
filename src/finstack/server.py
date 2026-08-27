@@ -202,11 +202,7 @@ def main() -> None:
         return
 
     if transport in ("http", "streamable-http"):
-        mcp.run(
-            transport="streamable-http",
-            host=config.host,
-            port=config.port,
-        )
+        mcp.run(transport="streamable-http",)
         return
 
     logger.error("Unknown transport: %s", transport)
