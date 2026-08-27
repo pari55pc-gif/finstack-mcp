@@ -1,6 +1,7 @@
 """Main entry point for the FinStack MCP server."""
 
 import logging
+import os
 import sys
 
 from mcp.server.fastmcp import FastMCP
@@ -131,7 +132,13 @@ TOOL_CATALOG = [
 
 TOTAL_TOOLS = len(TOOL_CATALOG) + 1
 
-mcp = FastMCP("FinStack")
+import os
+
+mcp = FastMCP(
+    "FinStack",
+    host=os.getenv("HOST", "0.0.0.0"),
+    port=int(os.getenv("PORT", "10000")),
+)
 
 register_indian_tools(mcp)
 register_global_tools(mcp)
