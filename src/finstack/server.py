@@ -208,9 +208,15 @@ def main() -> None:
         mcp.run(transport="stdio")
         return
 
-    if transport in ("http", "streamable-http"):
-        mcp.run(transport="streamable-http",)
-        return
+    iif transport in ("http", "streamable-http"):
+    port = int(os.getenv("PORT", "10000"))
+
+    mcp.run(
+        transport="streamable-http",
+        host="0.0.0.0",
+        port=port,
+    )
+    return
 
     logger.error("Unknown transport: %s", transport)
     sys.exit(1)
