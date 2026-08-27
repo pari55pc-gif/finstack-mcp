@@ -11,15 +11,12 @@ COPY LICENSE .
 RUN pip install --no-cache-dir -e ".[hosted]"
 
 # Environment
-ENV FINSTACK_HOST=0.0.0.0
-ENV FINSTACK_PORT=8000
+ENV HOST=0.0.0.0
+ENV PORT=10000
 ENV FINSTACK_TRANSPORT=streamable-http
 ENV FINSTACK_LOG_LEVEL=INFO
 
-EXPOSE 8000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
-  CMD python -c "import httpx; httpx.get('http://localhost:8000/health')" || exit 1
+EXPOSE 10000
+HEALTHCHECK NONE
 
 CMD ["python", "-m", "finstack.server", "--transport", "streamable-http"]
