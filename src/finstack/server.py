@@ -186,9 +186,8 @@ def finstack_info() -> str:
         indent=2,
     )
 
-
 def main() -> None:
-    """Start the MCP server using stdio or streamable HTTP transport."""
+    """Start the MCP server using stdio or streamable HTTP."""
     transport = "stdio"
 
     if "--transport" in sys.argv:
@@ -200,7 +199,10 @@ def main() -> None:
 
     transport = os.getenv("FINSTACK_TRANSPORT", transport)
 
-    logger.info("Starting FinStack MCP server v%s", __import__("finstack").__version__)
+    logger.info(
+        "Starting FinStack MCP server v%s",
+        __import__("finstack").__version__,
+    )
     logger.info("Transport: %s", transport)
     logger.info("Mode: %s", config.mode.value)
 
@@ -209,14 +211,17 @@ def main() -> None:
         return
 
     if transport in ("http", "streamable-http"):
-    port = int(os.getenv("PORT", "10000"))
+        host = os.getenv("HOST", "0.0.0.0")
+        port = int(os.getenv("PORT", "8000"))
 
-    mcp.run(
-        transport="streamable-http",
-        host="0.0.0.0",
-        port=port,
-    )
-    return
+        logger.info("Starting HTTP server on %s:%s", host, port)
+
+        mcp.run(
+            transport="streamable-http",
+            host=host,
+            port=port,
+        )
+        return
 
     logger.error("Unknown transport: %s", transport)
     sys.exit(1)
