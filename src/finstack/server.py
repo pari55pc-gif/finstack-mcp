@@ -218,8 +218,6 @@ def main() -> None:
 
         mcp.run(
             transport="streamable-http",
-            host=host,
-            port=port,
         )
         return
 
