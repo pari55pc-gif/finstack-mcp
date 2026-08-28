@@ -208,7 +208,7 @@ def main() -> None:
         mcp.run(transport="stdio")
         return
 
-    iif transport in ("http", "streamable-http"):
+    if transport in ("http", "streamable-http"):
     port = int(os.getenv("PORT", "10000"))
 
     mcp.run(
